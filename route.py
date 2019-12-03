@@ -10,8 +10,6 @@ def list():
 def update():
 	return controller.update()
 
-
-	
 if __name__ == '__main__':
 	app.run(debug = True)
 

@@ -1,3 +1,4 @@
+from click._compat import raw_input
 from flask import Flask,render_template
 import connect_to_database
 import print_from_table
@@ -72,7 +73,7 @@ def watermark(table_name):
 
 	model.update_all_a_b_c_in_table(conn,table_name,params)			
 
-	print "Total rows Updated %d"%count
+	print ("Total rows Updated %d"%count)
 	connect_to_database.close(conn)	
 
 
@@ -111,7 +112,7 @@ def reverse_watermark(table_name):
 
 	model.update_all_a_b_c_in_table(conn,table_name,params)			
 
-	print "Total rows Updated %d"%count
+	print ("Total rows Updated %d"%count)
 	connect_to_database.close(conn)		
 
 
@@ -126,7 +127,7 @@ def count_similarity(list1,list2):
 
 	per=(float(count)/9999)*100
 	ans=9999-count
-	print "Total tuples not matched %d "%(ans)
+	print ("Total tuples not matched %d "%(ans))
 	return per		
 
 def compare_tables(src,dest):
@@ -134,7 +135,7 @@ def compare_tables(src,dest):
 	list1=model.fetch_a_b_c_from_table(conn,src)
 	list2=model.fetch_a_b_c_from_table(conn,dest)
 	ans = count_similarity(list1,list2)
-	print ans
+	print (ans)
 
 if __name__ == '__main__':
 	while True:

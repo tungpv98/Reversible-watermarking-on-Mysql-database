@@ -16,7 +16,7 @@ def generate_parameters():#unset 2nd and 4th bit
 
 def print_paramters(row):
 	for x in row:
-		print x[0],x[1],x[2]
+		print (x[0],x[1],x[2])
 
 def check_bit(num):
 	if (((num>>1)&1) & ((num>>3)&1)):
@@ -28,11 +28,12 @@ def check_bit_unset(row):
 	flag=0
 	for x in row:
 		if check_bit(x[2]) == True:
-			print x[2]
+			print (x[2])
 			flag=1
 
 	if flag == 0:
-		print "No numbers found" 		
+		print("No numbers found")
+
 
 if __name__ == '__main__':
 		params=generate_parameters()

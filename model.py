@@ -1,3 +1,5 @@
+from click._compat import raw_input
+
 import connect_to_database
 import generate_data
 
@@ -7,10 +9,10 @@ def delete_everything_table(conn,table_name):
 	try:
 		curr.execute(sql)
 		conn.commit()
-		print "data deleted sucessfully"
+		print ("data deleted sucessfully")
 	except:
 		conn.rollback()
-		print 'data not deleted'
+		print ('data not deleted')
 
 
 def insert_into_table(conn,table_name):
@@ -21,10 +23,10 @@ def insert_into_table(conn,table_name):
 	try:
 		curr.executemany(sql,params)
 		conn.commit()
-		print "inserted_sucessfully"
+		print ("inserted_sucessfully")
 	except:
 		conn.rollback()
-		print "data not inserted"	
+		print ("data not inserted")
 		
 def insert_param_into_table(conn,table_name,rows):
 	conn=connect_to_database.connect()
@@ -39,10 +41,10 @@ def insert_param_into_table(conn,table_name,rows):
 	try:
 		curr.executemany(sql,rows)
 		conn.commit()
-		print "inserted_sucessfully"
+		print ("inserted_sucessfully")
 	except:
 		conn.rollback()
-		print "data not inserted"	
+		print ("data not inserted")
 
 
 
@@ -64,10 +66,10 @@ def create_table(conn,table_name):
 	try:
 		curr.execute(sql)
 		conn.commit()
-		print "table created"
+		print ("table created")
 	except:
 		conn.rollback()
-		print "table not created"
+		print ("table not created")
 
 
 def fetch_everything_from_table(conn,table_name):
@@ -88,7 +90,7 @@ def fetch_only_a_b_c_from_table(conn,table_name,id):
 		curr.execute("SELECT a,b,c FROM %s WHERE ID = %d"%(table_name,id))
 		row=curr.fetchone()
 	except:
-		print "Search not sucessfull"	
+		print ("Search not sucessfull")
 	return row
 
 def update_only_a_b_c_in_table(conn,table_name,id,a,b,c):
@@ -111,7 +113,7 @@ def update_all_a_b_c_in_table(conn,table_name,params):
 	sql=sql + "a = %s,b =%s,c = %s WHERE ID = %s"
 	curr.executemany(sql,params)
 	conn.commit()
-	print "Updated sucessfully"		
+	print ("Updated sucessfully")
 
 if __name__ == '__main__':
 	x=int(raw_input('''Enter 1 for deleting every row from table
@@ -124,8 +126,3 @@ Enter 2 for inserting rows\n'''))
 		insert_into_table(conn,y)	
 
 	connect_to_database.close(conn)
-
-
-
-
-	
