@@ -28,13 +28,13 @@ def update():
 
 def hash(id):
 	m=hashlib.md5()
-	m.update('gdkjssaklhd14252e8967bvsvvc')
-	m.update(str(id))
+	m.update('gdkjssaklhd14252e8967bvsvvc'.encode('utf-8'))
+	m.update(str(id).encode('utf-8'))
 	return m.hexdigest()
 
 
 def check_id(id):
-	if int(hash(id),27)%11 == 0:
+	if (int(hash(id),27)%11 == 0):
 		return True
 	else:
 		return False	
@@ -46,9 +46,9 @@ def watermark(table_name):
 	params=[]
 	#print "Watermarked Tuples"
 	for i in range(1,10000):
-		if check_id(i) == True:
+		if (check_id(i) == True):
 			row = model.fetch_only_a_b_c_from_table(conn,table_name,i)
-			#model.update_only_a_b_c_in_table(conn,table_name,i,1,1,1)
+			# model.update_only_a_b_c_in_table(conn,table_name,i,1,1,1)
 			a_old,b_old,c_old=row[0],row[1],row[2]
 			a8_old,b8_old=a_old%256,b_old%256
 			a_mod,b_mod=a_old-a8_old,b_old-b8_old
@@ -102,7 +102,7 @@ def reverse_watermark(table_name):
 			if ((c_old&10)==10):
 				a_new=a_mod+anew8
 				b_new=b_mod+bnew8
-				temp=sys.maxint
+				temp=sys.maxsize
 				c_new=c_old&(temp^10)
 
 				#print i,a_new,b_new,c_new
@@ -152,6 +152,4 @@ Enter 4 for extracting watermark\n'''))
 		elif text==4:
 			reverse_watermark('data2')	
 		else:
-			break		
-
-	
+			break
